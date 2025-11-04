@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+    <world name="willow_world">
+   
+    <!-- Basic lighting and ground plane -->
+    <include>
+        <uri>model://sun</uri>
+    </include>
