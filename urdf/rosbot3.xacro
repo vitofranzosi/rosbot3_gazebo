@@ -7,16 +7,18 @@
   Date: 06.11.2025
 -->
 
-<robot name="rosbot3" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:include filename="$(find rosbot3_description)/urdf/rosbot3.xacro"/>
-  <xacro:include filename="$(find ros_commons)/urdf/gazebo.xacro"/>
+<robot name="rosbot3" xmlns:xacro="http://www.ros.org/wiki/xacro"> <!-- Definição do namespace xacro -->
+  <xacro:include filename="$(find rosbot3_description)/urdf/rosbot3.xacro"/> <!-- Inclui o modelo básico do robô -->
+  <xacro:include filename="$(find ros_commons)/urdf/gazebo.xacro"/> <!-- Inclui definições relacionadas ao Gazebo -->
 
+  <!-- Controladores diferenciais para as rodas dianteiras e traseiras -->
   <xacro:macro
     name="add_controller"
     params="
       position
     "
   >
+    <!-- Definição do controlador diferencial para as rodas na posição especificada -->
     <xacro:differential_controller
       name="wheels_${position}"
       left_joint="joint_wheel_${position}_left"
@@ -26,11 +28,14 @@
     />
   </xacro:macro>
 
+  <!-- Adiciona os controladores para as rodas dianteiras e traseiras -->
   <xacro:add_controller position="front"/>
   <xacro:add_controller position="rear"/>
 
+  <!-- Remove o atrito das rodas dianteiras para simulação mais realista -->
   <xacro:remove_friction position="front"/>
 
+  <!-- Sensores do robô -->
   <xacro:depth_camera name="camera_front"/>
   <xacro:lidar_2d name="laser"/>
 </robot>
